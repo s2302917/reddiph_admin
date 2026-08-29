@@ -1,6 +1,7 @@
 /* =========================================================
-   Pulse Alert — stylesheet
-   Extracted from index.php so markup can stay pure HTML.
+   Pulse Alert — stylesheet (portalView.css)
+   Extracted from portalView.php so markup can stay pure HTML.
+   No duplicate selectors or properties — checked before renaming.
    ========================================================= */
 
 /* ---------- Design tokens ---------- */
@@ -19,7 +20,8 @@
   --font-body: "Inter", sans-serif;
   --font-accent: "Libre Caslon Text", serif;
 
-  --container-width: 80rem; /* 1280px */
+  --container-width: 80rem;
+  /* 1280px */
 }
 
 /* ---------- Reset / base ---------- */
@@ -61,6 +63,196 @@ button {
   padding: 0 1.5rem;
 }
 
+/* =========================================================
+   PORTAL ROLE SELECTION
+   ========================================================= */
+.portal {
+  min-height: 100vh;
+  background: #d1d1d1;
+  color: #050505;
+}
+
+.portal__topbar {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 3.1rem 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.back-btn {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #050505;
+}
+
+.back-btn:hover {
+  opacity: 0.65;
+}
+
+.brand {
+  width: 4.25rem;
+  height: 4.25rem;
+  border: 1px solid #8d1018;
+  color: #8d1018;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.45rem 0.4rem;
+  line-height: 0.9;
+  position: relative;
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  right: -0.25rem;
+  bottom: -0.2rem;
+  width: 0.8rem;
+  height: 1.2rem;
+  border-right: 1px solid #8d1018;
+  border-bottom: 1px solid #8d1018;
+  transform: skewY(-24deg);
+}
+
+.brand__line {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.brand__line--top {
+  align-self: flex-end;
+}
+
+.brand__line--bottom {
+  align-self: flex-start;
+}
+
+.portal__main {
+  max-width: 920px;
+  margin: 3.4rem auto 0;
+}
+
+.portal__title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.portal__subtitle {
+  margin: 1.2rem 0 0;
+  color: #ed9c51;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7rem;
+  margin-top: 4.35rem;
+}
+
+.role-card {
+  min-height: 19.2rem;
+  padding: 2.2rem 1.65rem 1.6rem;
+  border-radius: 1rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 0.25rem 0.35rem rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-0.3rem);
+  filter: brightness(1.08);
+}
+
+.card--admin {
+  background: #5a3035;
+}
+
+.card--doctor {
+  background: #493b48;
+}
+
+.card--nurse {
+  background: #354044;
+}
+
+.role-card__body {
+  margin-bottom: 1.25rem;
+}
+
+.role-card__title {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.role-card__subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.role-card__arrow {
+  align-self: flex-end;
+  color: #050505;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+@media (max-width: 980px) {
+
+  .portal__topbar,
+  .portal__main {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .role-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .portal__topbar {
+    padding-top: 1.5rem;
+  }
+
+  .portal__main {
+    margin-top: 2.5rem;
+  }
+
+  .role-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .role-card {
+    min-height: 10rem;
+  }
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 0 2.5rem;
@@ -85,6 +277,7 @@ button {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
+
 .btn--ghost:hover {
   background: rgba(255, 255, 255, 0.3);
 }
@@ -93,6 +286,7 @@ button {
   background: var(--color-maroon);
   color: #fff;
 }
+
 .btn--solid:hover {
   background: var(--color-maroon-light);
 }
@@ -110,6 +304,7 @@ button {
   font-size: 0.875rem;
   transition: background-color 0.2s ease;
 }
+
 .btn--cta:hover {
   background: var(--color-blush);
 }
@@ -128,6 +323,7 @@ button {
   white-space: nowrap;
   border: none;
 }
+
 .btn--gradient:hover {
   opacity: 0.9;
 }
@@ -379,6 +575,7 @@ button {
   .about__image {
     order: 1;
   }
+
   .about__content {
     order: 2;
   }
@@ -546,6 +743,7 @@ button {
   border: 1px solid var(--color-card-border);
   color: var(--color-ink);
 }
+
 .dispatch__nav-btn--prev:hover {
   background: var(--color-blush);
 }
@@ -554,6 +752,7 @@ button {
   background: var(--color-brown);
   color: #fff;
 }
+
 .dispatch__nav-btn--next:hover {
   opacity: 0.9;
 }
@@ -632,6 +831,7 @@ button {
     border-bottom: none;
     border-right: 1px solid rgba(234, 217, 214, 0.4);
   }
+
   .why-choose__cell:last-child {
     border-right: none;
   }

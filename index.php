@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Reddi PH — Barangay-to-hospital emergency response</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=Libre+Caslon+Text:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="public/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reddi PH — Barangay-to-hospital emergency response</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=Libre+Caslon+Text:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css">
 </head>
+
 <body>
 
   <!-- ============ HERO + NAVBAR ============ -->
@@ -17,7 +21,7 @@
     <nav class="navbar">
       <div class="navbar__brand">
         <div class="navbar__logo">
-          Reddi<br/>PH
+          Reddi<br />PH
         </div>
       </div>
 
@@ -35,19 +39,23 @@
       </span>
 
       <h1 class="hero__title">
-        Faster<br/>
-        <span class="hero__title-accent">communication.</span><br/>
-        Better <span class="hero__title-accent">care.</span><br/>
+        Faster<br />
+        <span class="hero__title-accent">communication.</span><br />
+        Better <span class="hero__title-accent">care.</span><br />
         <span class="hero__title-accent">Before they</span> arrive.
       </h1>
 
       <p class="hero__text">
-        Pulse Alert helps barangay teams send clear emergency details to hospitals, match available beds, and coordinate patient handoff before the ambulance reaches the facility.
+        Pulse Alert helps barangay teams send clear emergency details to hospitals, match available beds, and coordinate
+        patient handoff before the ambulance reaches the facility.
       </p>
 
-      <a href="#get-started" class="btn--cta">
+      <a href="app/controllers/portalController.php" class="btn--cta">
         click here to start
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
       </a>
     </div>
 
@@ -74,29 +82,38 @@
       </h2>
 
       <p class="section-desc">
-        Designed for barangay health workers, dispatch teams, and hospital staff, Pulse Alert turns urgent calls into easy-to-read updates so every team knows what to prepare next.
+        Designed for barangay health workers, dispatch teams, and hospital staff, Pulse Alert turns urgent calls into
+        easy-to-read updates so every team knows what to prepare next.
       </p>
 
       <div class="about__list">
         <div class="about__item">
           <span class="about__item-number">01</span>
           <span class="about__item-text">Faster SOS dispatch</span>
-          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </div>
         <div class="about__item about__item--alt">
           <span class="about__item-number">02</span>
           <span class="about__item-text">Real-time bed matching</span>
-          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </div>
         <div class="about__item">
           <span class="about__item-number">03</span>
           <span class="about__item-text">Doctor confirmation</span>
-          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </div>
         <div class="about__item">
           <span class="about__item-number">04</span>
           <span class="about__item-text">Coordinated patient handoff</span>
-          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="about__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </div>
       </div>
     </div>
@@ -131,7 +148,8 @@
       </h2>
 
       <p class="section-desc dispatch__desc">
-        Send the patient's location, condition, destination options, and hospital confirmation in one simple flow — reducing repeated calls when every minute matters.
+        Send the patient's location, condition, destination options, and hospital confirmation in one simple flow —
+        reducing repeated calls when every minute matters.
       </p>
 
     </div>
@@ -197,7 +215,10 @@
       <div class="contact__cards">
         <div class="contact-card">
           <div class="contact-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3 7l9 6 9-6" />
+            </svg>
           </div>
           <div>
             <p class="contact-card__title">Email</p>
@@ -206,7 +227,10 @@
         </div>
         <div class="contact-card">
           <div class="contact-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
           </div>
           <div>
             <p class="contact-card__title">Phone</p>
@@ -215,7 +239,10 @@
         </div>
         <div class="contact-card">
           <div class="contact-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
           </div>
           <div>
             <p class="contact-card__title">Location</p>
@@ -236,7 +263,8 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="message">Message</label>
-          <textarea id="message" rows="4" placeholder="Tell us about your barangay or hospital needs" class="form-textarea"></textarea>
+          <textarea id="message" rows="4" placeholder="Tell us about your barangay or hospital needs"
+            class="form-textarea"></textarea>
         </div>
         <button type="submit" class="btn--gradient btn--submit">
           Send message
@@ -308,4 +336,5 @@
 
   <script src="public/js/script.js"></script>
 </body>
+
 </html>

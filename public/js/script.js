@@ -17,200 +17,94 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // =========================================================
-  // FORGOT PASSWORD MODALS
+  // FORGOT PASSWORD MODALS (Generic Handler)
   // =========================================================
+  function setupForgotPasswordModal(role) {
+    var modalId = role === 'admin' ? 'adminForgotPassModal' : (role + 'ForgotPassModal');
+    var linkId = role === 'admin' ? 'hospitaladminForgotPassLink' : (role + 'ForgotPassLink');
+    var closeId = role === 'admin' ? 'adminForgotPassBackBtn' : (role + 'ForgotPassBackBtn');
+    var emailId = role === 'admin' ? 'adminforgotpass-email' : (role + 'forgotpass-email');
 
-  // --- 1. Hospital Admin Forgot Password Modal ---
-  var adminForgotModal = document.getElementById('adminForgotPassModal');
-  var adminForgotLink = document.getElementById('hospitaladminForgotPassLink');
-  var adminForgotClose = document.getElementById('adminForgotPassBackBtn');
+    var modal = document.getElementById(modalId);
+    var link = document.getElementById(linkId);
+    var closeBtn = document.getElementById(closeId);
 
-  function openAdminForgotModal() {
-    if (adminForgotModal) {
-      adminForgotModal.classList.add('is-open');
-      adminForgotModal.setAttribute('aria-hidden', 'false');
-      var emailInput = document.getElementById('adminforgotpass-email');
-      if (emailInput) {
-        setTimeout(function () {
-          emailInput.focus();
-        }, 150);
+    function openModal() {
+      if (modal) {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        var emailInput = document.getElementById(emailId);
+        if (emailInput) {
+          setTimeout(function () { emailInput.focus(); }, 150);
+        }
       }
     }
-  }
 
-  function closeAdminForgotModal() {
-    if (adminForgotModal) {
-      adminForgotModal.classList.remove('is-open');
-      adminForgotModal.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  if (adminForgotLink) {
-    adminForgotLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      openAdminForgotModal();
-    });
-  }
-
-  if (adminForgotClose) {
-    adminForgotClose.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeAdminForgotModal();
-    });
-  }
-
-  if (adminForgotModal) {
-    adminForgotModal.addEventListener('click', function (e) {
-      if (e.target === adminForgotModal) {
-        closeAdminForgotModal();
-      }
-    });
-  }
-
-  // --- 2. Doctor Forgot Password Modal ---
-  var doctorForgotModal = document.getElementById('doctorForgotPassModal');
-  var doctorForgotLink = document.getElementById('doctorForgotPassLink');
-  var doctorForgotClose = document.getElementById('doctorForgotPassBackBtn');
-
-  function openDoctorForgotModal() {
-    if (doctorForgotModal) {
-      doctorForgotModal.classList.add('is-open');
-      doctorForgotModal.setAttribute('aria-hidden', 'false');
-      var emailInput = document.getElementById('doctorforgotpass-email');
-      if (emailInput) {
-        setTimeout(function () {
-          emailInput.focus();
-        }, 150);
+    function closeModal() {
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
       }
     }
-  }
 
-  function closeDoctorForgotModal() {
-    if (doctorForgotModal) {
-      doctorForgotModal.classList.remove('is-open');
-      doctorForgotModal.setAttribute('aria-hidden', 'true');
+    if (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
     }
-  }
 
-  if (doctorForgotLink) {
-    doctorForgotLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      openDoctorForgotModal();
-    });
-  }
-
-  if (doctorForgotClose) {
-    doctorForgotClose.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeDoctorForgotModal();
-    });
-  }
-
-  if (doctorForgotModal) {
-    doctorForgotModal.addEventListener('click', function (e) {
-      if (e.target === doctorForgotModal) {
-        closeDoctorForgotModal();
-      }
-    });
-  }
-
-  // --- 3. Nurse Forgot Password Modal ---
-  var nurseForgotModal = document.getElementById('nurseForgotPassModal');
-  var nurseForgotLink = document.getElementById('nurseForgotPassLink');
-  var nurseForgotClose = document.getElementById('nurseForgotPassBackBtn');
-
-  function openNurseForgotModal() {
-    if (nurseForgotModal) {
-      nurseForgotModal.classList.add('is-open');
-      nurseForgotModal.setAttribute('aria-hidden', 'false');
-      var emailInput = document.getElementById('nurseforgotpass-email');
-      if (emailInput) {
-        setTimeout(function () {
-          emailInput.focus();
-        }, 150);
-      }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeModal();
+      });
     }
-  }
 
-  function closeNurseForgotModal() {
-    if (nurseForgotModal) {
-      nurseForgotModal.classList.remove('is-open');
-      nurseForgotModal.setAttribute('aria-hidden', 'true');
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
     }
+
+    return { open: openModal, close: closeModal };
   }
 
-  if (nurseForgotLink) {
-    nurseForgotLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      openNurseForgotModal();
-    });
-  }
-
-  if (nurseForgotClose) {
-    nurseForgotClose.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeNurseForgotModal();
-    });
-  }
-
-  if (nurseForgotModal) {
-    nurseForgotModal.addEventListener('click', function (e) {
-      if (e.target === nurseForgotModal) {
-        closeNurseForgotModal();
-      }
-    });
-  }
+  var adminForgotModal = setupForgotPasswordModal('admin');
+  var doctorForgotModal = setupForgotPasswordModal('doctor');
+  var nurseForgotModal = setupForgotPasswordModal('nurse');
 
   // Global ESC key listener for all modals
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' || e.key === 'Esc') {
-      closeAdminForgotModal();
-      closeDoctorForgotModal();
-      closeNurseForgotModal();
+      adminForgotModal.close();
+      doctorForgotModal.close();
+      nurseForgotModal.close();
     }
   });
 
-  // Admin forgot password form submission handler
-  var adminForgotForm = document.getElementById('adminForgotPassForm');
-  if (adminForgotForm) {
-    adminForgotForm.addEventListener('submit', function (event) {
-      var action = adminForgotForm.getAttribute('action');
-      if (!action || action === '#') {
-        event.preventDefault();
-        var email = document.getElementById('adminforgotpass-email').value;
-        alert('Reset link request sent for ' + email + ' (prototype).');
-        closeAdminForgotModal();
-      }
-    });
+  // Forgot password form submission handler (Generic for all roles)
+  function setupForgotPasswordForm(role, modalHandler) {
+    var formId = role === 'admin' ? 'adminForgotPassForm' : (role + 'ForgotPassForm');
+    var emailId = role === 'admin' ? 'adminforgotpass-email' : (role + 'forgotpass-email');
+    var form = document.getElementById(formId);
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        var action = form.getAttribute('action');
+        if (!action || action === '#') {
+          event.preventDefault();
+          var email = document.getElementById(emailId).value;
+          alert('Reset link request sent for ' + email + ' (prototype).');
+          modalHandler.close();
+        }
+      });
+    }
   }
 
-  // Doctor forgot password form submission handler
-  var doctorForgotForm = document.getElementById('doctorForgotPassForm');
-  if (doctorForgotForm) {
-    doctorForgotForm.addEventListener('submit', function (event) {
-      var action = doctorForgotForm.getAttribute('action');
-      if (!action || action === '#') {
-        event.preventDefault();
-        var input = document.getElementById('doctorforgotpass-email').value;
-        alert('Reset link request sent for ' + input + ' (prototype).');
-        closeDoctorForgotModal();
-      }
-    });
-  }
-
-  // Nurse forgot password form submission handler
-  var nurseForgotForm = document.getElementById('nurseForgotPassForm');
-  if (nurseForgotForm) {
-    nurseForgotForm.addEventListener('submit', function (event) {
-      var action = nurseForgotForm.getAttribute('action');
-      if (!action || action === '#') {
-        event.preventDefault();
-        var input = document.getElementById('nurseforgotpass-email').value;
-        alert('Reset link request sent for ' + input + ' (prototype).');
-        closeNurseForgotModal();
-      }
-    });
-  }
+  setupForgotPasswordForm('admin', adminForgotModal);
+  setupForgotPasswordForm('doctor', doctorForgotModal);
+  setupForgotPasswordForm('nurse', nurseForgotModal);
 
   // =========================================================
   // FORM PROTOTYPES
@@ -238,4 +132,49 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  // =========================================================
+  // SIGN UP ANIMATIONS & INTERACTIONS (Generic Handler)
+  // =========================================================
+  function setupSignupForm(role) {
+    var formId = role + 'SignupForm';
+    var shellSelector = '.' + role + '-signup-shell';
+    var buttonSelector = '.' + role + '-signup-submit';
+    var fieldSelector = '.' + role + '-signup-field input';
+
+    // Add visibility class to shell
+    var shell = document.querySelector(shellSelector);
+    if (shell) {
+      shell.classList.add('is-visible');
+    }
+
+    // Setup form submission handler
+    var form = document.getElementById(formId);
+    if (form) {
+      form.addEventListener('submit', function () {
+        var submitButton = form.querySelector(buttonSelector);
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Creating account...';
+          submitButton.style.opacity = '0.9';
+        }
+      });
+    }
+
+    // Setup input focus/blur handlers
+    var inputs = document.querySelectorAll(fieldSelector);
+    inputs.forEach(function (input) {
+      input.addEventListener('focus', function () {
+        input.parentElement.classList.add('is-focused');
+      });
+
+      input.addEventListener('blur', function () {
+        input.parentElement.classList.remove('is-focused');
+      });
+    });
+  }
+
+  setupSignupForm('nurse');
+  setupSignupForm('doctor');
+  setupSignupForm('hospitaladmin');
 });

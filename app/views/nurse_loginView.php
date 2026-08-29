@@ -77,7 +77,8 @@
                 </form>
 
                 <footer class="nurse-login-footer">
-                    <span>Not registered? </span><a href="#" class="nurse-signup-link">Sign up here</a>
+                    <span>Not registered? </span><a href="../controllers/nurse_signupController.php"
+                        class="nurse-signup-link">Sign up here</a>
                 </footer>
             </div>
         </main>

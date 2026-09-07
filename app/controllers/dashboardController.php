@@ -2,9 +2,7 @@
 /**
  * dashboardController.php
  *
- * CONTROLLER — Handles all business logic, data processing, and routing for the dashboard.
- * Pulls data from the Model, applies business rules and transformations,
- * then passes clean data to the View for rendering.
+ * Controller for the Pulse Alert admin dashboard.
  */
 
 require_once __DIR__ . '/../models/dashboardModel.php';
@@ -18,154 +16,123 @@ class DashboardController
         $this->model = new DashboardModel();
     }
 
-    /**
-     * Main entry point — orchestrates the dashboard page render.
-     */
     public function index(): void
     {
-        $metrics = $this->model->getMetrics();
-        $alerts = $this->model->getRecentAlerts(4);
-        $hospitals = $this->model->getHospitalNetwork();
-        $responseData = $this->model->getResponseTimeData();
+        $metrics = $this->prepareMetrics($this->model->getMetrics());
+        $alerts = $this->prepareAlerts($this->model->getRecentAlerts());
+        $hospitalNetwork = $this->prepareHospitalNetwork($this->model->getHospitalNetwork());
+        $responseChart = $this->prepareResponseChart($this->model->getResponseTimeData());
 
-        $data = [
-            'pageTitle' => 'Dashboard',
-            'hospitalName' => 'DSB District Hospital',
-            'hospitalSubtitle' => 'Admitting & Coordination',
-            'coordinatorName' => 'Charlotte M.',
-            'coordinatorRole' => 'Chief Coordinator',
-            'metrics' => $this->prepareMetrics($metrics),
-            'alerts' => $this->prepareAlerts($alerts),
-            'hospitals' => $this->prepareHospitalNetwork($hospitals),
-            'responseChart' => $this->prepareResponseChart($responseData),
-            'systemStatus' => 'All systems operational',
-        ];
+        $hospitalName = 'Dashboard';
+        $pageTitle = 'La Carlota District Hospital : Admitting & Coordination';
+        $coordinatorName = 'Charlotte M.';
+        $coordinatorRole = 'Chief Coordinator';
+        $alertCount = (int) ($metrics['activeAlerts']['value'] ?? 0);
 
-        $this->render($data);
+        require __DIR__ . '/../views/dashboardView.php';
     }
 
-    /**
-     * Prepares metrics for display (includes calculated percentages).
-     */
     private function prepareMetrics(array $metrics): array
     {
-        $ambulancePercent = $metrics['total_ambulances'] > 0
-            ? round(($metrics['available_ambulances'] / $metrics['total_ambulances']) * 100)
-            : 0;
+        $available = max(0, (int) ($metrics['availableAmbulances'] ?? 0));
+        $total = max(0, (int) ($metrics['totalAmbulances'] ?? 0));
+        $capacity = max(0, min(100, (float) ($metrics['hospitalCapacity'] ?? 0)));
 
         return [
-            'active_alerts' => [
+            'activeAlerts' => [
                 'label' => 'Active Alerts',
-                'value' => $metrics['active_alerts'],
-                'badge' => '+' . $metrics['new_alerts'] . ' New',
-                'badgeClass' => 'dashboard-metric-badge--alert',
+                'value' => (int) ($metrics['activeAlerts'] ?? 0),
+                'suffix' => '',
+                'new' => (int) ($metrics['newAlerts'] ?? 0),
             ],
-            'available_ambulances' => [
+            'availableAmbulances' => [
                 'label' => 'Available Ambulances',
-                'value' => $metrics['available_ambulances'],
-                'total' => $metrics['total_ambulances'],
-                'display' => sprintf('%d/%d', $metrics['available_ambulances'], $metrics['total_ambulances']),
-                'percent' => $ambulancePercent,
+                'value' => $available,
+                'suffix' => '/' . $total,
+                'new' => null,
             ],
-            'response_time' => [
+            'avgResponseTime' => [
                 'label' => 'Avg Response Time',
-                'value' => $metrics['avg_response_time'],
-                'unit' => 'min',
+                'value' => number_format((float) ($metrics['avgResponseTime'] ?? 0), 1),
+                'suffix' => 'min',
+                'new' => null,
             ],
-            'hospital_capacity' => [
+            'hospitalCapacity' => [
                 'label' => 'Hospital Capacity',
-                'value' => $metrics['hospital_capacity_percent'],
-                'unit' => '%',
-                'percent' => $metrics['hospital_capacity_percent'],
+                'value' => number_format($capacity, 0) . '%',
+                'suffix' => '',
+                'new' => null,
             ],
         ];
     }
 
-    /**
-     * Prepares alert rows with human-readable time and status styling.
-     */
     private function prepareAlerts(array $alerts): array
     {
-        return array_map(function ($alert) {
-            $timestamp = strtotime($alert['created_at']);
-            $minutesAgo = floor((time() - $timestamp) / 60);
-            $timeText = $minutesAgo . ' minute' . ($minutesAgo !== 1 ? 's' : '') . ' ago';
+        return array_map(function (array $alert): array {
+            $minutes = max(0, (int) ($alert['minutesAgo'] ?? 0));
 
             return [
-                'id' => $alert['id'],
-                'status' => $alert['status'],
-                'statusClass' => $this->getStatusClass($alert['status']),
-                'incidentType' => $alert['incident_type'],
-                'location' => $alert['location'],
-                'timeAgo' => $timeText,
+                'status' => (string) ($alert['status'] ?? 'Stable'),
+                'statusClass' => $this->getStatusClass((string) ($alert['status'] ?? 'Stable')),
+                'incidentType' => (string) ($alert['incidentType'] ?? 'Unknown Incident'),
+                'location' => (string) ($alert['location'] ?? 'Unknown Location'),
+                'timeAgo' => $this->getTimeAgo($minutes),
             ];
         }, $alerts);
     }
 
-    /**
-     * Maps incident status to CSS class for styling.
-     */
-    private function getStatusClass(string $status): string
-    {
-        $map = [
-            'Critical' => 'dashboard-alert-status--critical',
-            'Dispatched' => 'dashboard-alert-status--dispatched',
-            'Stable' => 'dashboard-alert-status--stable',
-            'Resolved' => 'dashboard-alert-status--resolved',
-        ];
-        return $map[$status] ?? 'dashboard-alert-status--default';
-    }
-
-    /**
-     * Prepares hospital network cards with capacity calculations.
-     */
     private function prepareHospitalNetwork(array $hospitals): array
     {
-        return array_map(function ($hospital) {
-            $capacityPercent = $hospital['total_beds'] > 0
-                ? round(($hospital['available_beds'] / $hospital['total_beds']) * 100)
-                : 0;
+        return array_map(function (array $hospital): array {
+            $available = max(0, (int) ($hospital['availableBeds'] ?? 0));
+            $total = max(1, (int) ($hospital['totalBeds'] ?? 1));
+            $usedPercent = max(0, min(100, (($total - $available) / $total) * 100));
 
             return [
-                'id' => $hospital['id'],
-                'name' => $hospital['name'],
-                'distanceKm' => $hospital['distance_km'],
-                'availableBeds' => $hospital['available_beds'],
-                'totalBeds' => $hospital['total_beds'],
-                'bedDisplay' => sprintf('%d/%d', $hospital['available_beds'], $hospital['total_beds']),
-                'capacityPercent' => $capacityPercent,
-                'specializations' => $hospital['specializations'],
-                'specialList' => array_map('trim', explode(',', $hospital['specializations'])),
+                'name' => (string) ($hospital['name'] ?? 'Hospital'),
+                'distance' => (string) ($hospital['distance'] ?? ''),
+                'availableBeds' => $available,
+                'totalBeds' => $total,
+                'availabilityPercent' => round(($available / $total) * 100, 1),
+                'usedPercent' => round($usedPercent, 1),
+                'specialties' => array_values($hospital['specialties'] ?? []),
             ];
         }, $hospitals);
     }
 
-    /**
-     * Prepares response time chart data (converts to JSON for JS charting).
-     */
-    private function prepareResponseChart(array $data): string
+    private function prepareResponseChart(array $data): array
     {
-        $labels = array_map(fn($row) => $row['hour'], $data);
-        $values = array_map(fn($row) => (float) $row['response_time_minutes'], $data);
+        $labels = array_values($data['labels'] ?? []);
+        $values = array_map('floatval', array_values($data['values'] ?? []));
 
-        return json_encode([
+        return [
             'labels' => $labels,
             'values' => $values,
-        ]);
+            'max' => max(25, (int) ceil((max($values ?: [0]) + 3) / 5) * 5),
+        ];
     }
 
-    /**
-     * Extracts data into scope and includes the View.
-     */
-    private function render(array $data = []): void
+    private function getStatusClass(string $status): string
     {
-        extract($data);
-        require __DIR__ . '/../views/dashboardView.php';
+        return match (strtolower(trim($status))) {
+            'critical' => 'dashboard-status--critical',
+            'dispatched' => 'dashboard-status--dispatched',
+            'stable' => 'dashboard-status--stable',
+            default => 'dashboard-status--default',
+        };
+    }
+
+    private function getTimeAgo(int $minutes): string
+    {
+        if ($minutes < 1) {
+            return 'Just now';
+        }
+
+        return $minutes . 'm ago';
     }
 }
 
-/**
- * Bootstrap — runs the dashboard directly when this file is accessed.
- * Visit dashboardController.php in the browser to see the dashboard.
- */
-(new DashboardController())->index();
+// Direct access: /app/controllers/dashboardController.php
+if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__)) {
+    (new DashboardController())->index();
+}

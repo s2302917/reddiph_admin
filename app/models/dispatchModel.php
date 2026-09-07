@@ -55,10 +55,10 @@ class dispatchModel
     public function getStaffOnDuty(): array
     {
         return [
-            ['id' => 1, 'full_name' => 'Dr. Maria Santos',   'department' => 'Cardiology',          'is_available' => 1],
-            ['id' => 2, 'full_name' => 'Dr. James Dela Cruz','department' => 'Emergency Medicine',  'is_available' => 1],
-            ['id' => 3, 'full_name' => 'Nurse R. Cruz',      'department' => 'ER Ward',              'is_available' => 1],
-            ['id' => 4, 'full_name' => 'Nurse A. Tan',       'department' => 'General Ward',         'is_available' => 0],
+            ['id' => 1, 'full_name' => 'Dr. Maria Santos',    'department' => 'Cardiology',         'is_available' => 1],
+            ['id' => 2, 'full_name' => 'Dr. James Dela Cruz', 'department' => 'Emergency Medicine', 'is_available' => 1],
+            ['id' => 3, 'full_name' => 'Nurse R. Cruz',       'department' => 'ER Ward',             'is_available' => 1],
+            ['id' => 4, 'full_name' => 'Nurse A. Tan',        'department' => 'General Ward',        'is_available' => 0],
         ];
     }
 

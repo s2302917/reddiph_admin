@@ -76,49 +76,49 @@ class dispatchController
     /**
      * Formats facility metrics into percentage bars + display values.
      */
- private function prepareFacilityStatus(array $rows): array
-{
-    $formatted = [];
+    private function prepareFacilityStatus(array $rows): array
+    {
+        $formatted = [];
 
-    foreach ($rows as $row) {
-        $current = (float) $row['current_value'];
-        $max = (float) $row['max_value'];
+        foreach ($rows as $row) {
+            $current = (float) $row['current_value'];
+            $max = (float) $row['max_value'];
 
-        // Calculate capacity percentage
-        $percent = $max > 0
-            ? round(($current / $max) * 100)
-            : 0;
+            // Calculate capacity percentage
+            $percent = $max > 0
+                ? round(($current / $max) * 100)
+                : 0;
 
-        // Keep percentage within valid progress-bar range
-        $percent = max(0, min(100, $percent));
+            // Keep percentage within valid progress-bar range
+            $percent = max(0, min(100, $percent));
 
-        // Determine capacity color class
-        if ($percent >= 80) {
-            $capacityLevel = 'high';
-        } elseif ($percent >= 50) {
-            $capacityLevel = 'medium';
-        } else {
-            $capacityLevel = 'low';
+            // Determine capacity color class
+            if ($percent >= 80) {
+                $capacityLevel = 'high';
+            } elseif ($percent >= 50) {
+                $capacityLevel = 'medium';
+            } else {
+                $capacityLevel = 'low';
+            }
+
+            $formatted[$row['metric_key']] = [
+                'label' => $this->metricLabel($row['metric_key']),
+
+                'display' => $max > 0
+                    ? sprintf('%d/%d', $current, $max)
+                    : ($row['status_label'] ?? ''),
+
+                'percent' => $percent,
+
+                // Color is decided by Controller
+                'capacityClass' => 'incomingdispatch-metric-bar-fill--' . $capacityLevel,
+
+                'statusText' => $row['status_label'] ?? null,
+            ];
         }
 
-        $formatted[$row['metric_key']] = [
-            'label' => $this->metricLabel($row['metric_key']),
-
-            'display' => $max > 0
-                ? sprintf('%d/%d', $current, $max)
-                : ($row['status_label'] ?? ''),
-
-            'percent' => $percent,
-
-            // Color is decided by Controller
-            'capacityClass' => 'incomingdispatch-metric-bar-fill--' . $capacityLevel,
-
-            'statusText' => $row['status_label'] ?? null,
-        ];
+        return $formatted;
     }
-
-    return $formatted;
-}
 
     private function metricLabel(string $key): string
     {
@@ -181,10 +181,10 @@ class dispatchController
      * Extracts $data into scope and includes dispatchView.php.
      */
     private function render(array $data = []): void
-{
-    extract($data);
-    require_once __DIR__ . '/../views/dispatchView.php';
-}
+    {
+        extract($data);
+        require_once __DIR__ . '/../views/dispatchView.php';
+    }
 }
 
 /**

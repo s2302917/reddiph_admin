@@ -55,10 +55,10 @@
                     <h2 class="nurse-login-main-title">Log in to your account</h2>
                 </header>
 
-                <form class="nurse-login-form" id="nurseLoginForm" action="#" method="POST">
-                    <div class="nurse-form-group">
+<form class="nurse-login-form" id="nurseLoginForm" action="../controllers/nurse_loginController.php" method="POST">
+    <input type="hidden" name="action" value="nurse_login">                    <div class="nurse-form-group">
                         <label class="nurse-form-label" for="nurse-email">Nurse ID / Email</label>
-                        <input type="text" id="nurse-email" name="email" class="nurse-form-input"
+                        <input type="text" id="nurse-email" name="work_email" class="nurse-form-input"
                             placeholder="name@hospital.gov.ph" required autocomplete="username">
                     </div>
 

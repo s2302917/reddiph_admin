@@ -37,12 +37,12 @@
       </div>
 
       <nav class="incomingdispatch-nav" aria-label="Primary">
-        <a href="#" class="incomingdispatch-nav-item incomingdispatch-nav-item--active"
+        <a href="/reddiph_admin/app/controllers/dispatchController.php" class="incomingdispatch-nav-item incomingdispatch-nav-item--active"
           id="incomingdispatch-nav-dispatches">
           <span class="incomingdispatch-nav-icon" aria-hidden="true">📋</span>
           Incoming dispatches
         </a>
-        <a href="#" class="incomingdispatch-nav-item" id="incomingdispatch-nav-dashboard">
+        <a href="/reddiph_admin/app/controllers/dashboardController.php" class="incomingdispatch-nav-item" id="incomingdispatch-nav-dashboard">
           <span class="incomingdispatch-nav-icon" aria-hidden="true">📊</span>
           Dashboard
         </a>

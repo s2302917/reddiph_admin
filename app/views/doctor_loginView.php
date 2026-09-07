@@ -56,11 +56,11 @@
                     <h2 class="doctor-login-main-title">Log in to your account</h2>
                 </header>
 
-                <form class="doctor-login-form" id="doctorLoginForm" action="#" method="POST">
-                    <div class="doctor-form-group">
+<form class="doctor-login-form" id="doctorLoginForm" action="../controllers/doctor_loginController.php" method="POST">
+    <input type="hidden" name="action" value="doctor_login">
+                        <div class="doctor-form-group">
                         <label class="doctor-form-label" for="doctor-email">Doctor ID / Email</label>
-                        <input type="text" id="doctor-email" name="email" class="doctor-form-input"
-                            placeholder="name@hospital.gov.ph" required autocomplete="username">
+<input type="text" id="doctor-email" name="work_email" class="doctor-form-input"                            placeholder="name@hospital.gov.ph" required autocomplete="username">
                     </div>
 
                     <div class="doctor-form-group">

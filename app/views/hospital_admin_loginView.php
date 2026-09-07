@@ -56,10 +56,10 @@
                     <h2 class="hospitaladmin-login-main-title">Log in to your account</h2>
                 </header>
 
-                <form class="hospitaladmin-login-form" id="hospitaladminLoginForm" action="#" method="POST">
-                    <div class="hospitaladmin-form-group">
+<form class="hospitaladmin-login-form" id="hospitaladminLoginForm" action="../controllers/hospital_admin_loginController.php" method="POST">
+    <input type="hidden" name="action" value="admin_login">                    <div class="hospitaladmin-form-group">
                         <label class="hospitaladmin-form-label" for="hospitaladmin-email">Work email</label>
-                        <input type="email" id="hospitaladmin-email" name="email" class="hospitaladmin-form-input"
+                        <input type="email" id="hospitaladmin-email" name="work_email" class="hospitaladmin-form-input"
                             placeholder="name@hospital.gov.ph" required autocomplete="email">
                     </div>
 

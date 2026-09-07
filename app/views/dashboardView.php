@@ -2,271 +2,213 @@
 /**
  * dashboardView.php
  *
- * VIEW — Contains all HTML markup for the dashboard.
- * All class and ID attributes are prefixed with "dashboard-" for namespace isolation.
- * This file receives clean data arrays from the Controller and renders the page.
+ * Pure presentation template. Dashboard content uses only dashboard- classes.
+ * Sidebar/header reuse incomingdispatch.css as requested.
  */
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle ?? 'Dashboard') ?> — PulseAlert Admin</title>
+    <title>Dashboard — PulseAlert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="../../public/css/incomingdispatch.css">
+    <link rel="stylesheet" href="../../public/css/dashboard.css">
 </head>
+<body class="incomingdispatch-body dashboard-body">
+<div class="incomingdispatch-shell dashboard-shell">
 
-<body class="dashboard-body">
-
-    <!-- ============ SIDEBAR ============ -->
-    <aside class="dashboard-sidebar">
-        <div class="dashboard-sidebar-header">
-            <div class="dashboard-logo">
-                <svg viewBox="0 0 24 24" fill="currentColor" class="dashboard-logo-icon">
-                    <circle cx="12" cy="12" r="10" opacity="0.2" />
-                    <path d="M12 2a10 10 0 0110 10" />
-                </svg>
-                <div class="dashboard-logo-text">
-                    <div class="dashboard-logo-brand">PULSE</div>
-                    <div class="dashboard-logo-subtext">ALERT</div>
-                </div>
-                <div class="dashboard-logo-badge">ADMIN</div>
-            </div>
+    <aside class="incomingdispatch-sidebar dashboard-sidebar" id="incomingdispatch-sidebar">
+        <div class="incomingdispatch-brand">
+            <span class="incomingdispatch-brand-badge">PULSE<br>ALERT</span>
+            <span class="incomingdispatch-brand-tag">ADMIN</span>
         </div>
 
-        <nav class="dashboard-sidebar-nav">
-            <a href="/app/controllers/dispatchController.php" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">📋</span>
-                <span class="dashboard-nav-label">Incoming dispatches</span>
-            </a>
-            <a href="/app/controllers/dashboardController.php" class="dashboard-nav-item dashboard-nav-item--active">
-                <span class="dashboard-nav-icon">📊</span>
-                <span class="dashboard-nav-label">Dashboard</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">⚠️</span>
-                <span class="dashboard-nav-label">Emergency Alerts</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">🗺️</span>
-                <span class="dashboard-nav-label">Live Mapping</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">👥</span>
-                <span class="dashboard-nav-label">Staff Schedule</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">🏥</span>
-                <span class="dashboard-nav-label">Hospital Network</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">📈</span>
-                <span class="dashboard-nav-label">Analytics</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">📋</span>
-                <span class="dashboard-nav-label">Logs & Demographics</span>
-            </a>
-            <a href="#" class="dashboard-nav-item">
-                <span class="dashboard-nav-icon">⚙️</span>
-                <span class="dashboard-nav-label">Settings</span>
-            </a>
-        </nav>
+       <nav class="incomingdispatch-nav" aria-label="Primary">
+    <a href="/reddiph_admin/app/controllers/dispatchController.php"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-dispatches">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">📋</span>
+        Incoming dispatches
+    </a>
 
-        <div class="dashboard-sidebar-footer">
-            <div class="dashboard-system-status">
-                <div class="dashboard-status-indicator"></div>
-                <span class="dashboard-status-text">System Status</span>
+    <a href="/reddiph_admin/app/controllers/dashboardController.php"
+       class="incomingdispatch-nav-item incomingdispatch-nav-item--active"
+       id="incomingdispatch-nav-dashboard">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">📊</span>
+        Dashboard
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-alerts">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">⚠️</span>
+        Emergency Alerts
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-mapping">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">🗺️</span>
+        Live Mapping
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-schedule">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">👥</span>
+        Staff Schedule
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-network">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">🏥</span>
+        Hospital Network
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-analytics">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">📈</span>
+        Analytics
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-logs">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">📋</span>
+        Logs &amp; Demographics
+    </a>
+
+    <a href="#"
+       class="incomingdispatch-nav-item"
+       id="incomingdispatch-nav-settings">
+        <span class="incomingdispatch-nav-icon" aria-hidden="true">⚙️</span>
+        Settings
+    </a>
+</nav>
+
+        <div class="incomingdispatch-system-status" id="incomingdispatch-system-status">
+            <span class="incomingdispatch-system-status-icon">!</span>
+            <div>
+                <p class="incomingdispatch-system-status-title">System Status</p>
+                <p class="incomingdispatch-system-status-sub">All systems operational.</p>
             </div>
-            <p class="dashboard-status-message"><?= htmlspecialchars($systemStatus ?? 'All systems operational') ?></p>
         </div>
     </aside>
 
-    <!-- ============ MAIN LAYOUT ============ -->
-    <div class="dashboard-container">
-
-        <!-- ============ HEADER ============ -->
-        <header class="dashboard-header">
-            <div class="dashboard-header-left">
-                <h1 class="dashboard-header-hospital-name"><?= htmlspecialchars($hospitalName ?? '') ?></h1>
-                <h2 class="dashboard-page-title"><?= htmlspecialchars($pageTitle ?? 'Dashboard') ?></h2>
-                <p class="dashboard-page-subtitle">
-                    <?= htmlspecialchars($hospitalSubtitle ?? 'Admitting & Coordination') ?>
-                </p>
+    <main class="incomingdispatch-main dashboard-main">
+        <header class="incomingdispatch-header dashboard-header">
+            <div class="dashboard-header-copy">
+                <h1 class="dashboard-title">Dashboard</h1>
+                <p class="dashboard-subtitle"><?= htmlspecialchars($pageTitle ?? 'La Carlota District Hospital : Admitting & Coordination') ?></p>
             </div>
 
-            <div class="dashboard-header-controls">
-                <div class="dashboard-search">
-                    <span class="dashboard-search-icon" aria-hidden="true">⌕</span>
-                    <input type="text" class="dashboard-search-input" id="dashboard-search-input"
-                        placeholder="Search incidents, hospitals, or units..." aria-label="Search">
+            <div class="incomingdispatch-header-controls dashboard-header-controls">
+                <div class="incomingdispatch-search dashboard-search">
+                    <span class="incomingdispatch-search-icon">⌕</span>
+                    <input type="text" id="dashboard-search-input" class="incomingdispatch-search-input" placeholder="Search incidents, hospitals, or units..." autocomplete="off">
                 </div>
 
-                <button type="button" class="dashboard-bell" id="dashboard-bell-btn" aria-label="Notifications">
+                <button type="button" class="incomingdispatch-bell dashboard-bell" id="dashboard-bell-btn" aria-label="Notifications">
                     🔔
-                    <span class="dashboard-bell-dot" id="dashboard-bell-dot"></span>
+                    <?php if (($alertCount ?? 0) > 0): ?><span class="incomingdispatch-bell-dot" id="dashboard-bell-dot"></span><?php endif; ?>
                 </button>
 
-                <div class="dashboard-user" id="dashboard-user-menu">
-                    <div class="dashboard-user-avatar" aria-hidden="true"></div>
-                    <div class="dashboard-user-text">
-                        <p class="dashboard-user-name"><?= htmlspecialchars($coordinatorName ?? 'User') ?></p>
-                        <p class="dashboard-user-role"><?= htmlspecialchars($coordinatorRole ?? 'Admin') ?></p>
+                <div class="incomingdispatch-user dashboard-user" id="incomingdispatch-user-menu">
+                    <div class="incomingdispatch-user-text">
+                        <p class="incomingdispatch-user-name"><?= htmlspecialchars($coordinatorName ?? 'Charlotte M.') ?></p>
+                        <p class="incomingdispatch-user-role"><?= htmlspecialchars($coordinatorRole ?? 'Chief Coordinator') ?></p>
                     </div>
+                    <div class="incomingdispatch-user-avatar dashboard-avatar" aria-hidden="true"></div>
                 </div>
             </div>
         </header>
 
-        <!-- ============ MAIN CONTENT ============ -->
-        <main class="dashboard-main">
-
-            <!-- Metrics Row -->
-            <section class="dashboard-metrics">
-                <?php foreach (($metrics ?? []) as $key => $metric): ?>
-                    <div class="dashboard-metric-card" id="dashboard-metric-<?= htmlspecialchars($key) ?>">
-                        <h3 class="dashboard-metric-label"><?= htmlspecialchars($metric['label']) ?></h3>
-                        <div class="dashboard-metric-content">
-                            <?php if (isset($metric['value'])): ?>
-                                <div class="dashboard-metric-value">
-                                    <?= htmlspecialchars($metric['value']) ?>         <?php if (isset($metric['unit'])): ?><span
-                                            class="dashboard-metric-unit"><?= htmlspecialchars($metric['unit']) ?></span><?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if (isset($metric['display'])): ?>
-                                <div class="dashboard-metric-display"><?= htmlspecialchars($metric['display']) ?></div>
-                            <?php endif; ?>
-                            <?php if (isset($metric['badge'])): ?>
-                                <span class="dashboard-metric-badge <?= htmlspecialchars($metric['badgeClass'] ?? '') ?>">
-                                    <?= htmlspecialchars($metric['badge']) ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        <?php if (isset($metric['percent'])): ?>
-                            <div class="dashboard-metric-bar-track">
-                                <div class="dashboard-metric-bar-fill" data-percent="<?= (int) $metric['percent'] ?>"></div>
-                            </div>
-                        <?php endif; ?>
+        <section class="dashboard-metrics" aria-label="Dashboard metrics">
+            <?php foreach ($metrics as $key => $metric): ?>
+                <article class="dashboard-metric-card" data-dashboard-metric="<?= htmlspecialchars($key) ?>">
+                    <p class="dashboard-metric-label"><?= htmlspecialchars($metric['label']) ?></p>
+                    <div class="dashboard-metric-value-row">
+                        <strong class="dashboard-metric-value"><?= htmlspecialchars((string) $metric['value']) ?></strong>
+                        <?php if ($metric['suffix'] !== ''): ?><span class="dashboard-metric-suffix"><?= htmlspecialchars($metric['suffix']) ?></span><?php endif; ?>
+                        <?php if ($metric['new'] !== null): ?><span class="dashboard-metric-new">+<?= (int) $metric['new'] ?> New</span><?php endif; ?>
                     </div>
-                <?php endforeach; ?>
-            </section>
+                </article>
+            <?php endforeach; ?>
+        </section>
 
-            <!-- Content Grid -->
-            <div class="dashboard-grid">
+        <section class="dashboard-middle-grid">
+            <article class="dashboard-panel dashboard-alert-panel">
+                <div class="dashboard-panel-heading">
+                    <h2>Live Alert Feed</h2>
+                    <a href="#" class="dashboard-history-link">View History <span>→</span></a>
+                </div>
+                <div class="dashboard-alert-table-wrap">
+                    <table class="dashboard-alert-table" id="dashboard-alert-table">
+                        <thead>
+                            <tr><th>STATUS</th><th>INCIDENT TYPE</th><th>LOCATION</th><th>TIME</th></tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($alerts as $alert): ?>
+                            <tr class="dashboard-alert-row">
+                                <td><span class="dashboard-status <?= htmlspecialchars($alert['statusClass']) ?>"><?= htmlspecialchars($alert['status']) ?></span></td>
+                                <td class="dashboard-alert-incident"><?= htmlspecialchars($alert['incidentType']) ?></td>
+                                <td><?= htmlspecialchars($alert['location']) ?></td>
+                                <td><?= htmlspecialchars($alert['timeAgo']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
 
-                <!-- Left Column: Live Alert Feed -->
-                <section class="dashboard-panel dashboard-panel--alerts">
-                    <div class="dashboard-panel-header">
-                        <h2 class="dashboard-panel-title">Live Alert Feed</h2>
-                        <a href="#" class="dashboard-panel-action">View History →</a>
-                    </div>
-                    <div class="dashboard-panel-body">
-                        <table class="dashboard-alerts-table">
-                            <thead class="dashboard-alerts-thead">
-                                <tr>
-                                    <th class="dashboard-alerts-th">STATUS</th>
-                                    <th class="dashboard-alerts-th">INCIDENT TYPE</th>
-                                    <th class="dashboard-alerts-th">LOCATION</th>
-                                    <th class="dashboard-alerts-th">TIME</th>
-                                </tr>
-                            </thead>
-                            <tbody class="dashboard-alerts-tbody">
-                                <?php foreach (($alerts ?? []) as $alert): ?>
-                                    <tr class="dashboard-alert-row">
-                                        <td class="dashboard-alert-cell">
-                                            <span
-                                                class="dashboard-alert-badge <?= htmlspecialchars($alert['statusClass']) ?>">
-                                                <?= htmlspecialchars($alert['status']) ?>
-                                            </span>
-                                        </td>
-                                        <td class="dashboard-alert-cell"><?= htmlspecialchars($alert['incidentType']) ?>
-                                        </td>
-                                        <td class="dashboard-alert-cell"><?= htmlspecialchars($alert['location']) ?></td>
-                                        <td class="dashboard-alert-cell"><?= htmlspecialchars($alert['timeAgo']) ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+            <article class="dashboard-panel dashboard-chart-panel">
+                <div class="dashboard-panel-heading">
+                    <h2>Response Performance</h2>
+                </div>
+                <div class="dashboard-chart-wrap">
+                    <canvas id="dashboard-response-chart" aria-label="Response performance line chart"></canvas>
+                </div>
+                <script type="application/json" id="dashboard-chart-data"><?= htmlspecialchars(json_encode($responseChart, JSON_UNESCAPED_SLASHES), ENT_NOQUOTES) ?></script>
+            </article>
+        </section>
 
-                <!-- Right Column: Response Performance Chart -->
-                <section class="dashboard-panel dashboard-panel--chart">
-                    <div class="dashboard-panel-header">
-                        <h2 class="dashboard-panel-title">Response Performance</h2>
-                    </div>
-                    <div class="dashboard-panel-body">
-                        <canvas id="dashboard-response-chart" class="dashboard-chart" width="640" height="300"
-                            data-chart-data="<?= htmlspecialchars($responseChart ?? '{}') ?>"></canvas>
-                    </div>
-                </section>
-
+        <section class="dashboard-panel dashboard-network-panel">
+            <div class="dashboard-panel-heading dashboard-network-heading">
+                <h2>Hospital Network Status</h2>
+                <button type="button" class="dashboard-filter">⚑&nbsp; Specialty: All</button>
             </div>
 
-            <!-- Hospital Network Status -->
-            <section class="dashboard-hospital-network">
-                <div class="dashboard-hospital-header">
-                    <h2 class="dashboard-hospital-title">Hospital Network Status</h2>
-                    <button class="dashboard-filter-btn">▼ Specialty: All</button>
-                </div>
-                <div class="dashboard-hospital-grid">
-                    <?php foreach (($hospitals ?? []) as $hospital): ?>
-                        <div class="dashboard-hospital-card"
-                            id="dashboard-hospital-<?= htmlspecialchars($hospital['id']) ?>">
-                            <div class="dashboard-hospital-card-header">
-                                <h3 class="dashboard-hospital-name"><?= htmlspecialchars($hospital['name']) ?></h3>
-                                <span
-                                    class="dashboard-hospital-distance"><?= htmlspecialchars($hospital['distanceKm']) ?>km</span>
-                            </div>
-                            <div class="dashboard-hospital-metric">
-                                <span class="dashboard-hospital-metric-label">Bed Availability</span>
-                                <span
-                                    class="dashboard-hospital-metric-value"><?= htmlspecialchars($hospital['bedDisplay']) ?></span>
-                            </div>
-                            <div class="dashboard-hospital-bar-track">
-                                <div class="dashboard-hospital-bar-fill"
-                                    data-percent="<?= (int) $hospital['capacityPercent'] ?>"></div>
-                            </div>
-                            <div class="dashboard-hospital-specs">
-                                <?php foreach ($hospital['specialList'] as $spec): ?>
-                                    <span class="dashboard-hospital-spec-tag"><?= htmlspecialchars(trim($spec)) ?></span>
-                                <?php endforeach; ?>
-                            </div>
+            <div class="dashboard-hospital-grid" id="dashboard-hospital-grid">
+                <?php foreach ($hospitalNetwork as $hospital): ?>
+                    <article class="dashboard-hospital-card">
+                        <div class="dashboard-hospital-title-row">
+                            <h3><?= htmlspecialchars($hospital['name']) ?></h3>
+                            <span class="dashboard-distance"><?= htmlspecialchars($hospital['distance']) ?></span>
                         </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-
-        </main>
-
-    </div>
-
-    <!-- ============ SCRIPTS ============ -->
-    <script src="/public/js/script.js"></script>
-    <script>
-        // Initialize dashboard animations and interactions when DOM is ready
-        document.addEventListener('DOMContentLoaded', function () {
-            // Header interactions
-            if (typeof dashboardInitHeaderInteractions === 'function') {
-                dashboardInitHeaderInteractions();
-            }
-            // Metric animations
-            if (typeof dashboardAnimateMetricBars === 'function') {
-                dashboardAnimateMetricBars();
-            }
-            if (typeof dashboardAnimateHospitalBars === 'function') {
-                dashboardAnimateHospitalBars();
-            }
-            // Chart initialization
-            if (typeof dashboardInitChart === 'function') {
-                dashboardInitChart();
-            }
-        });
-    </script>
-
+                        <div class="dashboard-bed-label-row">
+                            <span>Bed Availability</span>
+                            <strong><?= (int) $hospital['availableBeds'] ?> / <?= (int) $hospital['totalBeds'] ?></strong>
+                        </div>
+                        <div class="dashboard-bed-track" aria-label="<?= htmlspecialchars((string) $hospital['availabilityPercent']) ?> percent available">
+                            <div class="dashboard-bed-fill" data-percent="<?= htmlspecialchars((string) $hospital['availabilityPercent']) ?>"></div>
+                        </div>
+                        <div class="dashboard-specialties">
+                            <?php foreach ($hospital['specialties'] as $specialty): ?>
+                                <span class="dashboard-specialty-tag"><?= htmlspecialchars($specialty) ?></span>
+                            <?php endforeach; ?>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="../../public/js/script.js"></script>
 </body>
-
 </html>

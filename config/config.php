@@ -1,51 +1,93 @@
-```php
 <?php
-/**
- * ============================================================
- * Hostinger Database Configuration
- * Database: u672637579_reddiph
- * User:     u672637579_reddiph
- * ============================================================
- */
-
-// Local XAMPP / MySQL hostname
-// Change this only if your local database runs on another host.
-$db_host = "localhost";
-
-// Database name
-$db_name = "u672637579_reddiph";
-
-// Database username
-$db_user = "u672637579_reddiph";
-
-// Database password
-$db_pass = "Reddiphcapstone2";
-
-// Character set
-$charset = "utf8mb4";
-
 
 /**
- * PDO Connection
+ * ReddiPH Database Configuration
+ *
+ * Automatically uses:
+ * - XAMPP database when running localhost
+ * - Hostinger database when uploaded to your domain
  */
-$dsn = "mysql:host={$db_host};dbname={$db_name};charset={$charset}";
 
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
-];
+final class Database
+{
+    private static ?PDO $connection = null;
 
+    public static function connection(): PDO
+    {
+        if (self::$connection instanceof PDO) {
+            return self::$connection;
+        }
 
-try {
-    $pdo = new PDO($dsn, $db_user, $db_pass, $options);
+        $hostName = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
-} catch (PDOException $e) {
+        $isLocal =
+            PHP_SAPI === 'cli' ||
+            str_contains($hostName, 'localhost') ||
+            str_contains($hostName, '127.0.0.1');
 
-    // Do not expose database credentials/errors to users
-    error_log("Database connection failed: " . $e->getMessage());
+        if ($isLocal) {
 
-    die("Database connection failed. Please try again later.");
+            // ==========================================
+            // XAMPP DATABASE
+            // ==========================================
+
+            $dbHost = getenv('DB_HOST') ?: 'localhost';
+            $dbPort = getenv('DB_PORT') ?: '3306';
+$dbName = getenv('DB_NAME') ?: 'reddiph_db';
+            $dbUser = getenv('DB_USER') ?: 'root';
+            $dbPass = getenv('DB_PASS') ?: '';
+
+        } else {
+
+            // ==========================================
+            // HOSTINGER DATABASE
+            // ==========================================
+
+            $dbHost = getenv('DB_HOST') ?: 'localhost';
+            $dbPort = getenv('DB_PORT') ?: '3306';
+
+            $dbName = getenv('DB_NAME') ?: 'u672637579_reddiph';
+
+            $dbUser = getenv('DB_USER') ?: 'u672637579_reddiph';
+
+            /*
+             * Replace this with your actual Hostinger
+             * database password if DB_PASS is not configured.
+             */
+            $dbPass = getenv('DB_PASS') ?: 'YOUR_HOSTINGER_DATABASE_PASSWORD';
+        }
+
+        $charset = 'utf8mb4';
+
+        $dsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset={$charset}";
+
+        try {
+
+            self::$connection = new PDO(
+                $dsn,
+                $dbUser,
+                $dbPass,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
+
+            return self::$connection;
+
+        } catch (PDOException $e) {
+
+            error_log(
+                'Database connection error: ' .
+                $e->getMessage()
+            );
+
+            // IMPORTANT:
+            // Keep the actual error visible while debugging.
+            throw new RuntimeException(
+                'Database connection failed: ' . $e->getMessage()
+            );
+        }
+    }
 }
-?>
-```

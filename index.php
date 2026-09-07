@@ -10,7 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=Libre+Caslon+Text:ital@0;1&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="stylesheet" href="./public/css/style.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="navbar__actions">
-        <a href="#login" class="btn btn--ghost">Log in</a>
+        <a href="./app/controllers/portalController.php" class="btn btn--ghost">Log in</a>
         <a href="#register" class="btn btn--solid">Register</a>
       </div>
     </nav>
@@ -50,7 +50,7 @@
         patient handoff before the ambulance reaches the facility.
       </p>
 
-      <a href="app/controllers/portalController.php" class="btn--cta">
+      <a href="./app/controllers/portalController.php" class="btn--cta">
         click here to start
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
           stroke-linecap="round" stroke-linejoin="round">
@@ -68,7 +68,7 @@
   <!-- ============ ABOUT ============ -->
   <section id="about" class="about">
     <div class="about__image">
-      <img src="assets/images/landingPage/talking.png" alt="Hospital staff walking together" />
+      <img src="./assets/images/landingPage/talking.png" alt="Hospital staff walking together" />
     </div>
 
     <div class="about__content">
@@ -155,7 +155,7 @@
     </div>
 
     <div class="dispatch__image">
-      <img src="assets/images/landingPage/dispatch.png" alt="Dispatch team coordinating a response" />
+      <img src="./assets/images/landingPage/dispatch.png" alt="Dispatch team coordinating a response" />
     </div>
   </section>
 
@@ -334,7 +334,7 @@
     </div>
   </footer>
 
-  <script src="public/js/script.js"></script>
+  <script src="./public/js/script.js"></script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@
         Dashboard
     </a>
 
-    <a href="#"
+    <a href="/reddiph_admin/app/controllers/emergency_alertController.php"
        class="incomingdispatch-nav-item"
        id="incomingdispatch-nav-alerts">
         <span class="incomingdispatch-nav-icon" aria-hidden="true">⚠️</span>

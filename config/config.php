@@ -33,7 +33,7 @@ final class Database
 
             $dbHost = getenv('DB_HOST') ?: 'localhost';
             $dbPort = getenv('DB_PORT') ?: '3306';
-$dbName = getenv('DB_NAME') ?: 'reddiph_db';
+            $dbName = getenv('DB_NAME') ?: 'reddiph_db';
             $dbUser = getenv('DB_USER') ?: 'root';
             $dbPass = getenv('DB_PASS') ?: '';
 
@@ -45,16 +45,9 @@ $dbName = getenv('DB_NAME') ?: 'reddiph_db';
 
             $dbHost = getenv('DB_HOST') ?: 'localhost';
             $dbPort = getenv('DB_PORT') ?: '3306';
-
-            $dbName = getenv('DB_NAME') ?: 'u672637579_reddiph';
-
-            $dbUser = getenv('DB_USER') ?: 'u672637579_reddiph';
-
-            /*
-             * Replace this with your actual Hostinger
-             * database password if DB_PASS is not configured.
-             */
-            $dbPass = getenv('DB_PASS') ?: 'YOUR_HOSTINGER_DATABASE_PASSWORD';
+            $dbName = getenv('DB_NAME') ?: 'u672637579_reddi_ph';
+            $dbUser = getenv('DB_USER') ?: 'u672637579_reddi_ph';
+            $dbPass = getenv('DB_PASS') ?: 'James101x';
         }
 
         $charset = 'utf8mb4';
@@ -83,8 +76,6 @@ $dbName = getenv('DB_NAME') ?: 'reddiph_db';
                 $e->getMessage()
             );
 
-            // IMPORTANT:
-            // Keep the actual error visible while debugging.
             throw new RuntimeException(
                 'Database connection failed: ' . $e->getMessage()
             );
